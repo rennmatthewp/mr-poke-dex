@@ -12,7 +12,7 @@ export class CardContainer extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getPokeTypes();
   }
 
