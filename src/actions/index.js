@@ -1,1 +1,4 @@
-export const fakeAction = () => ({ type: 'FAKE'})
+export const populateTypes = pokeTypes => ({
+  type: 'POPULATE_TYPES',
+  pokeTypes
+});
