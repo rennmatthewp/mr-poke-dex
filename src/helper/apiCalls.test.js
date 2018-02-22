@@ -2,7 +2,7 @@ import { getPokeTypesData } from './apiCalls';
 import * as mock from '../mock/mockData';
 
 describe('getPokeTypesData', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     window.fetch = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         status: 200,
@@ -27,8 +27,7 @@ describe('getPokeTypesData', () => {
         status: 500
       })
     );
-    const error = 'error'
 
-    expect(getPokeTypesData()).rejects.toEqual(Error(error));
+    expect(getPokeTypesData()).rejects.toEqual('error');
   });
 });
