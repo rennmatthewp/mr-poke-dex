@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { populateTypes } from '../../actions';
 import { getPokeTypesData } from '../../helper/apiCalls';
 import { Card } from '../../components/Card/';
+import './CardContainer.css'
 
 export class CardContainer extends Component {
   constructor() {
@@ -26,12 +27,19 @@ export class CardContainer extends Component {
     }
   };
 
+  getPokemon = async (pokemonArr) => {
+    const response = await fetch('http://localhost:3001/pokemon/');
+    console.log(await response.json());
+  };
+
   render() {
-    const allCards = this.props.pokeTypes.map((type, index) => (
-      <Card {...type} key={index} />
-    ));
-    return <div>{allCards}</div>;
-    return <div>sure</div>;
+    if (this.props.pokeTypes.length) {
+      const allCards = this.props.pokeTypes.map(type => (
+        <Card {...type} key={type.id} getPokemon={this.getPokemon} />
+      ));
+      return <div className="CardContainer" >{allCards}</div>;
+    }
+    return <img src="../../loading.gif" alt="pika piii!" />;
   }
 }
 
