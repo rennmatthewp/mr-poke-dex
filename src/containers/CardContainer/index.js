@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { populateTypes } from '../../actions';
+import { getPokeTypesData } from '../../helper/apiCalls';
+
 export class CardContainer extends Component {
   constructor() {
     super();
@@ -10,18 +12,25 @@ export class CardContainer extends Component {
     };
   }
 
-  async componentDidMount() {
-    const response = await fetch('http://localhost:3001/types');
-    const resolved = await response.json();
-    this.props.populateTypes(resolved);
+  componentDidMount() {
+    this.getPokeTypes();
   }
+
+  getPokeTypes = async () => {
+    try {
+      const pokeTypes = await getPokeTypesData();
+      this.props.populateTypes(pokeTypes);
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
 
   render() {
     return <div>CardContainer</div>;
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   populateTypes: pokeTypes => dispatch(populateTypes(pokeTypes))
 });
 
