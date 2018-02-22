@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { shape, func, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { populateTypes } from '../../actions';
 import { getPokeTypesData } from '../../helper/apiCalls';
@@ -26,12 +26,19 @@ export class CardContainer extends Component {
   };
 
   render() {
-    return <div>CardContainer</div>;
+    return <img src="../../../loading.gif" alt="pika piii!!" />;
   }
 }
+
+CardContainer.propTypes = {
+  populateTypes: PropTypes.func,
+  pokeTypes: PropTypes.object
+};
+
+export const mapStateToProps = state => ({ pokeTypes: state.pokeTypes });
 
 export const mapDispatchToProps = dispatch => ({
   populateTypes: pokeTypes => dispatch(populateTypes(pokeTypes))
 });
 
-export default connect(null, mapDispatchToProps)(CardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);
