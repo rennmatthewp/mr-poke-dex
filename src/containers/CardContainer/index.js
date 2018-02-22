@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { populateTypes } from '../../actions';
-import {getPokeTypesData} from '../../helper/apiCalls';
+import { getPokeTypesData } from '../../helper/apiCalls';
 
 export class CardContainer extends Component {
   constructor() {
@@ -20,10 +20,10 @@ export class CardContainer extends Component {
     try {
       const pokeTypes = await getPokeTypesData();
       this.props.populateTypes(pokeTypes);
-    } catch(error) {
-      this.setState({error});
+    } catch (error) {
+      this.setState({ error });
     }
-  }
+  };
 
   render() {
     return <div>CardContainer</div>;
