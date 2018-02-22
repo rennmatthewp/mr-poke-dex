@@ -30,7 +30,7 @@ export class CardContainer extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   populateTypes: pokeTypes => dispatch(populateTypes(pokeTypes))
 });
 
