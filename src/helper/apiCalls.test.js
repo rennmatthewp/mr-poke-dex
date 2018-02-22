@@ -2,12 +2,14 @@ import { getPokeTypesData } from './apiCalls';
 import * as mock from '../mock/mockData';
 
 describe('getPokeTypesData', () => {
-  window.fetch = jest.fn().mockImplementationOnce(() =>
-    Promise.resolve({
-      status: 200,
-      json: () => Promise.resolve(mock.pokeTypes)
-    })
-  );
+  beforeAll(() => {
+    window.fetch = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve(mock.pokeTypes)
+      })
+    );
+  });
 
   it('should call fetch with the correct args', () => {
     getPokeTypesData();
@@ -15,7 +17,18 @@ describe('getPokeTypesData', () => {
     expect(window.fetch).toHaveBeenCalledWith('http://localhost:3001/types');
   });
 
-  xit('should return a resolved promise', () => {});
+  it('should return a resolved promise', () => {
+    expect(getPokeTypesData()).resolves.toEqual(mock.pokeTypes);
+  });
 
-  xit('should handle a rejected promise', () => {});
+  it('should handle a rejected promise', () => {
+    window.fetch = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        status: 500
+      })
+    );
+    const error = 'error'
+
+    expect(getPokeTypesData()).rejects.toEqual(Error(error));
+  });
 });
