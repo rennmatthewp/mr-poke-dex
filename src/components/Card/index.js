@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Card.css'
 
-export const Card = ({name, pokemon, getPokemon}) => {  
+export const Card = ({type, getPokemon}) => {  
   
   return (
-    <div className="card" onClick={() => getPokemon(pokemon)}>
-      <h3>{name}</h3>
+    <div className="card" onClick={() => getPokemon(type.getPokemon)}>
+      <h3>{type.name}</h3>
     </div>
   );
 };
