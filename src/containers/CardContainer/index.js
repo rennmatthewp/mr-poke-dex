@@ -36,7 +36,12 @@ export class CardContainer extends Component {
   render() {
     if (this.props.pokeTypes.length) {
       const allCards = this.props.pokeTypes.map(type => (
-        <Card type={type} key={type.id} getPokemon={this.getPokemon} />
+        <Card
+          type={type}
+          key={type.id}
+          getPokemon={this.getPokemon}
+          pokemon={this.props.pokemon}
+        />
       ));
       return <div className="CardContainer">{allCards}</div>;
     }
@@ -50,7 +55,8 @@ CardContainer.propTypes = {
 };
 
 export const mapStateToProps = state => ({
-  pokeTypes: state.types
+  pokeTypes: state.types,
+  pokemon: state.pokemon
 });
 
 export const mapDispatchToProps = dispatch => ({

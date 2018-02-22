@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Card.css'
+import { connect } from 'react-redux';
+import './Card.css';
 
-export const Card = ({type, getPokemon}) => {  
+export const Card = ({ type, getPokemon, pokemon }) => {
+  console.log('pokemon:', pokemon)
   
   return (
     <div className="card" onClick={() => getPokemon(type.getPokemon)}>
@@ -12,5 +14,8 @@ export const Card = ({type, getPokemon}) => {
 };
 
 Card.propTypes = {
-  
+  type: PropTypes.shape({
+    pokemon: PropTypes.array,
+    name: PropTypes.string
+  })
 };
