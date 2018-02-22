@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { populateTypes } from '../../actions';
 import { getPokeTypesData } from '../../helper/apiCalls';
+import { Card } from '../../components/Card/';
 
 export class CardContainer extends Component {
   constructor() {
@@ -26,16 +27,20 @@ export class CardContainer extends Component {
   };
 
   render() {
-    return <img src="../../../loading.gif" alt="pika piii!!" />;
+    const allCards = this.props.pokeTypes.map((type, index) => (
+      <Card {...type} key={index} />
+    ));
+    return <div>{allCards}</div>;
+    return <div>sure</div>;
   }
 }
 
 CardContainer.propTypes = {
   populateTypes: PropTypes.func,
-  pokeTypes: PropTypes.object
+  pokeTypes: PropTypes.array
 };
 
-export const mapStateToProps = state => ({ pokeTypes: state.pokeTypes });
+export const mapStateToProps = state => ({ pokeTypes: state.types });
 
 export const mapDispatchToProps = dispatch => ({
   populateTypes: pokeTypes => dispatch(populateTypes(pokeTypes))
